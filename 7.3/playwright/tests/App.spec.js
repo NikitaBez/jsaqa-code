@@ -32,5 +32,7 @@ test("Unsuccessful authorization", async ({ page }) => {
   await page.waitForTimeout(delay);
   await page.screenshot({ path: "screenshot8.png", fullPage: true });
 
-  await expect(page.getByTestId("login-submit-btn")).toBeVisible();
+  await expect(page.getByTestId("login-error-hint")).toHaveText(
+    "Вы ввели неправильно логин или пароль"
+  );
 });
