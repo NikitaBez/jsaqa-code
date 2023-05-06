@@ -15,3 +15,10 @@ describe("Books names test suit", () => {
     ]);
   });
 });
+
+it("Equal books names should not sorted", () => {
+  expect(sorting.sortByName(["Властелин Колец", "Властелин Колец"])).toEqual([
+    "Властелин Колец",
+    "Властелин Колец",
+  ]);
+});
