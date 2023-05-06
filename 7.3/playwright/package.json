@@ -1,15 +1,14 @@
 {
   "name": "jsaqa_3_2",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright"
+    "test": "playwright test"
   },
-  "author": "",
+  "author": "Nikita Bezmenov",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "^1.12.3",
+    "@playwright/test": "^1.33.0",
     "playwright": "^1.12.3"
   }
 }
