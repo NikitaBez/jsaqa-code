@@ -37,10 +37,10 @@ describe("Github/team page tests", () => {
 describe("Github page tests", () => {
   beforeEach(async () => {
     page = await browser.newPage();
-    await page.goto("https://github.com");
   });
 
   test("The sign in page test", async () => {
+    await page.goto("https://github.com");
     const signInBtn = 'a[href="/login"]';
     await page.waitForSelector(signInBtn);
     await page.click(signInBtn);
@@ -50,31 +50,21 @@ describe("Github page tests", () => {
   }, 10000);
 
   test("Should open the pricing page", async () => {
+    await page.goto("https://github.com");
     const pricingBtn = "nav > ul > li:nth-child(4) > a";
     await page.waitForSelector(pricingBtn);
     await page.click(pricingBtn);
     await page.waitForTimeout(5000);
     const articleTitleSelector = "h1";
     await page.waitForSelector(articleTitleSelector);
-    const articleTitle = await page.$eval(
-      articleTitleSelector,
-      (element) => element.textContent
-    );
-    expect(articleTitle).toContain("Get the complete developer"); //действитеьлный заголовок на
-    //странице Get the complete developer platform., но тест с полным заголовком ни с какой другой
-    //частью заголовка и ни с какой другой проверочной функцией
+    const actual = await page.title();
+    expect(actual).toContain("Pricing · Plans for every developer · GitHub");
   }, 7000);
 
   test("Should open 'choose the enterprise plan' title", async () => {
-    page = await browser.newPage();
     await page.goto(
       "https://github.com/organizations/enterprise_plan?ref_cta=Start+a+free+enterprise+trial&ref_loc=Home+campaign+hero&ref_page=%2F"
     );
-    // const startFreeEnterpriseBtn = "div.d-flex.flex-column.flex-md-row > a";
-    // await page.waitForSelector(startFreeEnterpriseBtn);
-    // await page.click(startFreeEnterpriseBtn);
-    // await page.waitForTimeout(7000);   //данный код тоже не проходит тест, хотя открывает нужную страницу,
-    //и код вроде как написан верно. более того, проверочная функция срабатывает при прямом переходе на страницу
     const choosePlan = await page.title();
     expect(choosePlan).toContain("Choose an Enterprise plan · GitHub");
   }, 7000);
